@@ -1,1 +1,3 @@
 # group-journal
+
+# install these:
