@@ -13,14 +13,9 @@ import {
 import { db, auth } from "../utils/firebaseConfig"; // adjust the import path as needed
 import { onAuthStateChanged, User } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
+import { questions } from '../utils/questions';
 
-const questions = [
-  "What was the highlight of your day?",
-  "What is something new you learned today?",
-  "What are you grateful for today?",
-  "If you could have any superpower, what would it be and why?",
-  "Describe your perfect day."
-];
+const question = questions;
 
 export default function JournalEntry() {
   const navigate = useNavigate();
@@ -84,7 +79,7 @@ export default function JournalEntry() {
       <VStack spacing={4} align="stretch">
         <Heading size="lg">Daily Journal</Heading>
         <Text fontSize="md" fontWeight="bold">
-          {questions[currentQuestion]}
+          {question[currentQuestion]}
         </Text>
         {!submitted ? (
           <>
