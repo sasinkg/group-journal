@@ -11,10 +11,10 @@ jobs:
 
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4 # Updated to latest version
 
       - name: Set up Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4 # Updated to latest version
         with:
           node-version: 18
           cache: 'npm'
@@ -29,7 +29,7 @@ jobs:
         run: npm test # Comment this out if you don't have tests
 
       - name: Upload Artifact (Save Build Output)
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4 # Updated from v3 to v4
         with:
           name: dist
           path: dist/
