@@ -1,12 +1,18 @@
-import { ChakraProvider, Container } from "@chakra-ui/react";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import Login from "./components/Login";
 import JournalEntry from "./components/JournalEntry";
 
-export default function App() {
+function App() {
   return (
-    <ChakraProvider>
-      <Container maxW="container.md" py={8}>
-        <JournalEntry />
-      </Container>
-    </ChakraProvider>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Login />} />
+        <Route path="/journal" element={<JournalEntry />} />
+        {/* Catch-all route to redirect to login */}
+        <Route path="*" element={<Navigate to="/" replace />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
+
+export default App;

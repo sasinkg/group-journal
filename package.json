@@ -9,14 +9,16 @@
         "predeploy": "npm run build",
         "deploy": "gh-pages -d dist"
     },
-    "homepage": "https://sasinkg.github.io/journal-together",
+    "homepage": "https://sasinkg.github.io/group-journal",
     "dependencies": {
         "@chakra-ui/react": "^2.10.6",
         "@emotion/react": "^11.14.0",
         "@emotion/styled": "^11.14.0",
+        "firebase": "^11.4.0",
         "framer-motion": "^10.18.0",
         "react": "^18.2.0",
-        "react-dom": "^18.2.0"
+        "react-dom": "^18.2.0",
+        "react-router-dom": "^7.2.0"
     },
     "devDependencies": {
         "@types/react": "^18.2.42",
@@ -27,6 +29,6 @@
         "postcss": "^8.5.3",
         "tailwindcss": "^4.0.9",
         "typescript": "^5.3.3",
-        "vite": "^5.0.10"
+        "vite": "^6.2.0"
     }
 }
