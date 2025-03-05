@@ -9,13 +9,20 @@ import {
   setDoc,
   doc,
   getDoc,
+  getDocs,
+  deleteDoc,
 } from "firebase/firestore";
 import { db, auth } from "../utils/firebaseConfig"; // adjust the import path as needed
 import { onAuthStateChanged, User } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
-import { questions } from '../utils/questions';
 
-const question = questions;
+const questions = [
+  "What was the highlight of your day?",
+  "What is something new you learned today?",
+  "What are you grateful for today?",
+  "If you could have any superpower, what would it be and why?",
+  "Describe your perfect day."
+];
 
 export default function JournalEntry() {
   const navigate = useNavigate();
@@ -31,7 +38,7 @@ export default function JournalEntry() {
       if (!currentUser) {
         navigate("/");
       } else {
-        setUser(currentUser);
+        setUser(currentUser); 
         // For authenticated users, check Firestore for an existing submission
         const docRef = doc(db, "journalEntries", currentUser.uid);
         const docSnap = await getDoc(docRef);
@@ -73,13 +80,19 @@ export default function JournalEntry() {
       }
     }
   };
-
+  const resetAnswers = async () => {
+    const querySnashot = await getDocs(collection(db, "responses"));
+    const deletePromises = querySnashot.docs.map((doc) => deleteDoc(doc.ref));
+    await Promise.all(deletePromises);
+    
+    setAnswers([]); // Clear all responses
+  };
   return (
     <Container maxW = "md" py={8}>
       <VStack spacing={4} align="stretch">
         <Heading size="lg">Daily Journal</Heading>
         <Text fontSize="md" fontWeight="bold">
-          {question[currentQuestion]}
+          {questions[currentQuestion]}
         </Text>
         {!submitted ? (
           <>
@@ -93,7 +106,7 @@ export default function JournalEntry() {
             </Button>
           </>
         ) : (
-          <Responses answers={answers} />
+          <Responses answers={answers} resetAnswers = {resetAnswers} />
         )}
       </VStack>
     </Container>
